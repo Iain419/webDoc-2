@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to WebDoc</title>
+    <link rel="stylesheet" href="../static/css/style.css">
+    <script src="../static/js/app.js" defer></script>
+</head>
+<body class="ff-open-sans">
+    <header>{% include 'header.html' %}</header>
+    <main class="ff-open-sans">
+        <div class="grid-container">
+            <img src="../static/assets/vertical-man-doc.jpg" alt="">
+            <div>
+                <div class="intro">
+                    <h1>Connecting you to the nearest hosiptal, ambulance or private doctor services near you!!</h1>
+                </div>
+    
+                <div class="location-choosing">
+                    <div id="loc-selector">
+                        <div class="flex location-pin" style="gap: 1px;">
+                            <img src="../static/assets/pin.png" alt="" class="">
+                            <strong> Your current location?</strong>
+                        </div>
+                        <label for="currentloc">
+                        <input type="text" id="currentloc" placeholder="Enter your location address">
+                        </label>
+                        <button class="ok-btn" id="ok-btn">OK</button>
+                    </div>
+                </div>
+                <div class="services-offered flex" id="services-offered">
+
+                    <div class="service-card service-card-inactive">
+                        <form action="">
+                            <input type="text" name="location" value="" style="display: none" class="location-values">
+                            <button>
+                                <img src="../static/assets/hospital-dark.png" alt="">
+                                <div class="heading">
+                                    <h2>Hospital</h2>
+                                </div>
+                                <div class="description">
+                                    <p>All available hospitals near you</p>
+                                </div>
+                            </button>
+                        </form>
+                    </div>
+    
+                    <div class="service-card service-card-inactive">
+                        <form action="">
+                            <input type="text" name="location" value="" style="display: none" class="location-values">
+                            <button>
+                                <img src="../static/assets/ambulance-dark.png" alt="">
+                                <div class="heading">
+                                    <h2>Ambulance</h2>
+                                </div>
+                                <div class="description">
+                                    <p>All available abulance near you</p>
+                                </div>
+                            </button>
+                        </form>
+                      
+                    </div>
+    
+                    <div class="service-card service-card-inactive">
+                        <form action="">
+                            <input type="text" name="location" value="" style="display: none" class="location-values">
+                            <button>
+                                <img src="../static/assets/private-doc-dark.png" alt="">
+                                <div class="heading">
+                                    <h2>Private Doctor</h2>
+                                </div>
+                                <div class="description">
+                                    <p>Insearch of a private doc? Click here!</p>
+                                </div>
+                            </button>
+                        </form>
+                       
+                    </div>    
+                </div>
+            </div>
+            <img src="../static/assets/vertical-woman-doc.jpg" alt="" class="womanvert">
+        </div>
+
+
+        <div class="container">
+            <div class="instructions flex">
+                <div class="instruction">
+                    <img src="../static/assets/location-pin.png" alt="location-pin">
+                    <h3>Select your current location and press ok</h3>
+                </div>
+
+                <div class="instruction">
+                    <img src="../static/assets/hospitalserv.png" alt="location-pin">
+                    <h3>Choose the service you want</h3>
+                </div>
+
+                <div class="instruction">
+                    <img src="../static/assets/tick.png" alt="location-pin">
+                    <h3>Get the service you want</h3>
+                </div>
+            </div>
+        </div>
+
+            
+    </main>
+    <footer>{% include 'footer.html' %}</footer>
+</body>
+</html>
