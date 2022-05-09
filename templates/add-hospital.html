@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add hospital</title>
+    <link rel="stylesheet" href="..//static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="../static/js/add-hosi.js" defer></script>
+    
+</head>
+<body>
+    <header>{% include 'header.html'%}</header>
+    <main style="margin-top: 10em;">
+        
+        <form action="/update-hopital" method="POST" enctype="multipart/form-data">
+            <input type="number" name="ratings" value="" id="ratings-number" style="display: none"> 
+            <div class="grid-dashboard2">
+                <div class="name">
+                    <label for="name">Name: </label>
+                    <br>
+                    <input type="text" name="name" id="name">
+                </div>
+
+                <div class="location">
+                    <label for="location">Location: </label>
+                    <br>
+                    <input type="text" name="location" id="location">
+                </div>
+
+                <div class="name">
+                    <label for="phoneno">Phonenumber: </label>
+                    <br>
+                    <input type="text" name="phoneno" id="phoneno">
+                </div>
+
+                <div class="location">
+                    <label for="email">Email: </label>
+                    <br>
+                    <input type="email" name="email" id="email">
+                </div>
+
+                <div class="name">
+                    <label for="password">Password: </label>
+                    <br>
+                    <input type="password" name="password" id="password">
+                </div>
+
+                <div class="location">
+                    <label for="services-offered">Services Offered:</label>
+                    <br>
+                    <input type="textfield" name="services" id="services-offered">
+                </div>
+
+                <div class="location">
+                    <label for="ambulance">Ambulance available: </label>
+                    <select name="ambulance" id="ambulance">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+
+                <div class="name ambulance-pic">
+                    <h5>Profile photo: </h5>
+                    <img src="" id="blah" alt="profile-picture">
+                    <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
+                    <label for="profile-change">Add profile picture</label>
+                </div>
+
+                <div class="location ambulance-pic" id="ambulance-pic">
+                    <h5>If availabe update here</h5>
+                    <h5>Ambulance photo: </h5>
+                    <img src="" id="blah2" alt="ambulance-picture">
+                    <input type="file" name="ambulance-pic" id="ambulance-change" onchange="readURL2(this);">
+                    <label for="ambulance-change">Add ambulance picture</label>
+                </div>
+
+                
+
+                <div class="update name">
+                    <button typr="submit">Update</button>
+                </div>
+
+            </div>
+
+
+            
+        </form>
+    </main>
+</body>
+</html>

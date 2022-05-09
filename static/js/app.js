@@ -1,4 +1,4 @@
-const loginsignupbtn = document.getElementById("loginsignup");
+const loginsignupbtn = document.getElementById
 let modal = document.getElementById("myModal");
 
 const login_selector = document.getElementById("login-selector");
@@ -14,6 +14,15 @@ let seleced_location = localStorage.getItem('selectedLocation');
 let location_values = document.getElementsByClassName('location-values')
 let services_offered = document.getElementById('services-offered')
 
+let stars = document.getElementsByClassName('star')
+const ratings = document.getElementById('ratings-number')
+
+// const profile_pic = document.getElementById("profile-pic")
+
+// function base64convert(x) {
+//   return atob(x).split('').map(function(v) {return v.codePointAt(0)});
+// };
+// base64convert(profile_pic)
 
 if (localStorage.length === 1){
   loc_selector.innerHTML = `
@@ -76,12 +85,16 @@ if (localStorage.length === 1){
     localStorage.clear();
     location.reload()
   })
-} 
+}
 
-// When the user clicks the button, open the modal 
-loginsignupbtn.addEventListener('click', ()=> {
-  modal.style.display = "block";  
-})
+function loginSign(){
+  modal.style.display = "block";
+}
+
+// // When the user clicks the button, open the modal 
+// loginsignupbtn.addEventListener('click', ()=> {
+//   modal.style.display = "block";  
+// })
 
 
 // When the user clicks anywhere outside of the modal, close it
@@ -99,15 +112,17 @@ signup_selector.addEventListener('click', ()=>{
   signup_selector.classList.add('active-btn')
 
   credentials.innerHTML = `
-    <form action="">
+    <form action="/signup" method="POST" enctype="multipart/form-data">
     <div class="sign-login-content">
-        <input type="text" placeholder="Username" class="credential-data">
+        <input type="text" placeholder="Username" name="username" class="credential-data" required>
         <br>
-        <input type="email" placeholder="Email" class="credential-data">
+        <input type="text" placeholder="Your fullnames" name="fullname" class="credential-data" required>
         <br>
-        <input type="password" placeholder="Password" class="credential-data">
+        <input type="email" placeholder="Email" name="email" class="credential-data" required>
         <br>
-        <input type="password" placeholder="Password Again" class="credential-data">
+        <input type="password" placeholder="Password" name="password" class="credential-data" required>
+        <br>
+        <input type="password" placeholder="Password Again" name="password-again" class="credential-data" required>
         <br>
         <button type="submit" class="credentials-btn">SIGN UP</button>
     </div>
@@ -124,11 +139,11 @@ login_selector.addEventListener('click', ()=>{
   login_selector.classList.add('active-btn')
 
   credentials.innerHTML = `
-    <form action="">
+  <form action="/login" method="POST">
     <div class="sign-login-content">
-        <input type="email" placeholder="Email" class="credential-data">
+        <input type="text" placeholder="Username" name="username" class="credential-data">
         <br>
-        <input type="password" placeholder="Password" class="credential-data">
+        <input type="password" placeholder="Password" name="password" class="credential-data">
         <br>
         <button type="submit" class="credentials-btn">LOGIN</button>
     </div>
@@ -136,24 +151,62 @@ login_selector.addEventListener('click', ()=>{
   `
 })
 
-ok_btn.addEventListener('click', () => {
-  if (current_loc.value === ''){
-    current_loc.placeholder = `Please input a location`;
-    current_loc.classList.add('loc-input-warning')
-    ok_btn.style.background = 'rgb(226, 33, 33)';
-    setTimeout(() => {
-        current_loc.placeholder = `Enter your location address`;
-        ok_btn.style.background = '#0F25EB';
-        current_loc.classList.remove('loc-input-warning')}, 
-      2000);
-  }else{
-    localStorage.clear();
-    localStorage.setItem('selectedLocation', current_loc.value);
-    location.reload();
-  }
-  
-})
+function ok(){
+  ok_btn.addEventListener('click', () => {
+    if (current_loc.value === ''){
+      current_loc.placeholder = `Please input a location`;
+      current_loc.classList.add('loc-input-warning')
+      ok_btn.style.background = 'rgb(226, 33, 33)';
+      setTimeout(() => {
+          current_loc.placeholder = `Enter your location address`;
+          ok_btn.style.background = '#0F25EB';
+          current_loc.classList.remove('loc-input-warning')}, 
+        2000);
+    }else{
+      localStorage.clear();
+      localStorage.setItem('selectedLocation', current_loc.value);
+      location.reload();
+    }
+    
+  })
+}
+
 
 for (let i = 0; i < location_values.length; i++) {
     location_values[i].value = seleced_location;
 }
+
+
+function readURL(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+
+      reader.onload = function (e) {
+          $('#blah')
+              .attr('src', e.target.result);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+
+function readURL2(input) {
+  if (input.files && input.files[0]) {
+      var reader2 = new FileReader();
+
+      reader2.onload = function (e) {
+          $('#blah2')
+              .attr('src', e.target.result);
+      };
+
+      reader2.readAsDataURL(input.files[0]);
+  }
+}
+
+// function ratingsfun(){
+//   for(let i = 0; i < ratings.value; i++){
+//     stars[i].src = "../static/assets/icons/star2.png";
+//   }
+// }
+// ratingsfun()
+

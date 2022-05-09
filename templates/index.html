@@ -7,6 +7,7 @@
     <title>Welcome to WebDoc</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js/app.js" defer></script>
+    <script src="../static/js/loc-selec.js" defer></script>
 </head>
 <body class="ff-open-sans">
     <header>{% include 'header.html' %}</header>
@@ -15,6 +16,7 @@
             <img src="../static/assets/vertical-man-doc.jpg" alt="">
             <div>
                 <div class="intro">
+                    <p class="invalid-msg">{{msg}}</p>
                     <h1>Connecting you to the nearest hosiptal, ambulance or private doctor services near you!!</h1>
                 </div>
     
@@ -25,9 +27,9 @@
                             <strong> Your current location?</strong>
                         </div>
                         <label for="currentloc">
-                        <input type="text" id="currentloc" placeholder="Enter your location address">
+                        <input type="text" id="currentloc" placeholder="Enter your location address" onclick="ok()">
                         </label>
-                        <button class="ok-btn" id="ok-btn">OK</button>
+                        <button class="ok-btn" id="ok-btn" onclick="ok()">OK</button>
                     </div>
                 </div>
                 <div class="services-offered flex" id="services-offered">
@@ -103,7 +105,7 @@
             </div>
         </div>
 
-            
+     
     </main>
     <footer>{% include 'footer.html' %}</footer>
 </body>

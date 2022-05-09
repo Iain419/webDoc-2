@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>admin panel</title>
+</head>
+<body>
+    <header>{% include 'header.html'%}</header>
+    <main>
+        <div class="container">
+            <div class="panel flex">
+                <a href="/add-hospital">Add Hospital</a>
+                <a href="/all-hospitals">Remove Hospital</a>
+                <a href="/add-doctor">Add private doctor</a>
+                <a href="">Remove private doctor</a>
+                <a href="">Remove User</a>
+            </div>
+            <p style="text-align:center; margin-top: 0; color: #189c18; font-weight: bold; font-size: 2rem; margin-bottom: 0;" id="msg">{{msg}}</p>
+
+        </div>
+    </main>
+    <script>
+        let msg = document.getElementById('msg');
+        setTimeout(() => {msg.remove()}, 3000)
+    </script>
+</body>
+</html>

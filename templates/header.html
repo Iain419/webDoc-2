@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" href="..//static/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,11 +12,28 @@
 </head>
 <body>
     <nav class="mainnav ff-roboto">
-        <ul class="flex navbar" style="gap: 0;"> 
-            <li><a href=""  class="text-dark"><img src="../static/assets/doc.png" alt=""></a></li>
+        <ul class="flex navbar" style="gap: 0; align-items: center"> 
             <li style="font-weight: 900"><a href="#" class="text-dark fs-900">WEB<span class="text-blue" style="font-size: 30px;">DOC</span></a></li>
-            <li><a href=""><img src="../static/assets/doc2.png" alt="" class="text-dark"></a></li>
-            <li class="last-child"><button class="login-signup" id="loginsignup">LOGIN/SIGUP</button></li>
+            <li><a href=""><img src="../static/assets/icons/doctor.png" alt="" class="text-dark"></a></li>
+            <li class="last-child">
+                {% if session.username %}
+                <a href="/logout">
+                    <div class="info flex" style="gap: 0.5em; align-items:  center;">
+                        <p id="profile-pic">{{session.username}}</p>
+
+                        <div class="more-info">
+                            <div class="flex" style="flex-direction: column; align-items: center; gap: 1em;">
+                                <a href="">Account</a>
+                                <a href="/logout">Logout</a>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                
+                {% else %}
+                <button class="login-signup" id="loginsignup" onclick="loginSign()">LOGIN/SIGUP</button>
+                {% endif %}
+            </li>
         </ul>
     </nav>
 
@@ -28,16 +44,16 @@
     <div class="modal-content ff-roboto">
       <div class="modal-body">
        <div class="sign-login-btn flex">
-            <button class="active-btn" id="login-selector">Log In</button>
+            <button class="active-btn" id="login-selector" onclick="loginSignup()">Log In</button>
             <button class="inactive-btn" id="signup-selector">Sign Up</button>
         </div>
   
               <div id="credentials">
-                  <form action="">
+                  <form action="/login" method="POST">
                       <div class="sign-login-content">
-                          <input type="email" placeholder="Email" class="credential-data">
+                          <input type="text" placeholder="Username" name="username" class="credential-data">
                           <br>
-                          <input type="password" placeholder="Password" class="credential-data">
+                          <input type="password" placeholder="Password" name="password" class="credential-data">
                           <br>
                           <button type="submit" class="credentials-btn">LOGIN</button>
                       </div>

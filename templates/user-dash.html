@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="..//static/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <script src="../static/js/app.js" defer></script>
+</head>
+<body>
+    <header>{% include 'header.html'%}</header>
+    <main style="margin-top: 10em;">
+        <form action="">
+            <input type="number" name="ratings" value="" id="ratings-number" style="display: none"> 
+            <div class="grid-dashboard">
+                <div class="flex profile-pic">
+                    <img src="" id="blah" alt="profile-picture">
+                    <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
+                    <label for="profile-change">Change your profile picture</label>
+                </div>
+
+                <div class="name">
+                    <label for="name">Name: </label>
+                    <br>
+                    <input type="text" id="name">
+                </div>
+
+                <div class="location">
+                    <label for="fullname">Name (Fullname): </label>
+                    <br>
+                    <input type="text" id="fullname">
+                </div>
+
+                <div class="name">
+                    <label for="phoneno">Phonenumber: </label>
+                    <br>
+                    <input type="text" id="phoneno">
+                </div>
+
+                <div class="location">
+                    <label for="email">Email: </label>
+                    <br>
+                    <input type="email" id="email">
+                </div>
+
+                <div class="name">
+                    <label for="passw">Password: </label>
+                    <br>
+                    <input type="password" id="passw">
+                </div>
+
+
+                <div class="update name">
+                    <button>Update</button>
+                </div>
+
+                <div class="update location">
+                    <button>Delete Account</button>
+                </div>
+            </div>
+
+
+            
+        </form>
+    </main>
+</body>
+</html>
