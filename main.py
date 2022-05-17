@@ -700,10 +700,6 @@ def remove():
         return redirect('/scheduled-appoinments')
     
 
-
-
-
-
 @app.route('/logout')
 def logout():
     session.pop('username', None)
