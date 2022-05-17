@@ -16,72 +16,75 @@
 <body>
     <header>{% include 'header.html'%}</header>
     <main style="margin-top: 10em;">
-        <form action="">
-            <input type="number" name="ratings" value="" id="ratings-number" style="display: none"> 
-            <div class="grid-dashboard">
-                <div class="stars flex">
-                    <h4>Your ratings: </h4>
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
+        <div class="flex scheduled">
+            <a href="/scheduled-appoinments">Your appointments</a>
+        </div>
+        {% for row in rows%}
+        <form action="/dashboard-update", method="POST" enctype="multipart/form-data">
+                <input type="number" name="ratings" value="" id="ratings-number" style="display: none"> 
+                <div class="grid-dashboard">
+                    <div class="flex profile-pic">
+                        <img src="data:;base64,{{row[7].decode('utf-8')}}" id="blah" alt="profile-picture">
+                        <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
+                        <label for="profile-change">Change your profile picture</label>
+                    </div>
+
+                    <div class="name">
+                        <label for="name">Username: </label>
+                        <br>
+                        <input type="text" name="username" value="{{row[0]}}" id="name">
+                    </div>
+
+                    <div class="location">
+                        <label for="fullname">Name (Fullname): </label>
+                        <br>
+                        <input type="text" name="name" value="{{row[1]}}"id="fullname">
+                    </div>
+
+                    <div class="name">
+                        <label for="phoneno">Phonenumber: </label>
+                        <br>
+                        <input type="text" name="phoneno" value="{{row[3]}}"id="phoneno">
+                    </div>
+
+                    <div class="location">
+                        <label for="email">Email: </label>
+                        <br>
+                        <input type="email" name="email" value="{{row[4]}}"id="email">
+                    </div>
+
+                    <div class="name">
+                        <label for="passw">Password: </label>
+                        <br>
+                        <input type="text" name="password" value="{{row[6]}}" id="passw">
+                    </div>
+
+                    <div class="location">
+                        <label for="services-offered">Specialist in:</label>
+                        <br>
+                        <input type="textfield" name="specialist" value="{{row[5]}}" id="services-offered">
+                    </div>
+
+                    <div class="name">
+                        <label for="location">Location:</label>
+                        <br>
+                        <input type="text" name="location" value="{{row[2]}}" id="location">
+                    </div>
+
+
+                    <div class="update name">
+                        <button>Update</button>
+                    </div>
+
+                    <div class="update location">
+                        <button>Delete Account</button>
+                    </div>
                 </div>
-                <div class="flex profile-pic">
-                    <img src="" id="blah" alt="profile-picture">
-                    <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
-                    <label for="profile-change">Change your profile picture</label>
-                </div>
-
-                <div class="name">
-                    <label for="name">Name: </label>
-                    <br>
-                    <input type="text" id="name">
-                </div>
-
-                <div class="location">
-                    <label for="fullname">Name (Fullname): </label>
-                    <br>
-                    <input type="text" id="fullname">
-                </div>
-
-                <div class="name">
-                    <label for="phoneno">Phonenumber: </label>
-                    <br>
-                    <input type="text" id="phoneno">
-                </div>
-
-                <div class="location">
-                    <label for="email">Email: </label>
-                    <br>
-                    <input type="email" id="email">
-                </div>
-
-                <div class="name">
-                    <label for="passw">Password: </label>
-                    <br>
-                    <input type="password" id="passw">
-                </div>
-
-                <div class="location">
-                    <label for="services-offered">Services Offered:</label>
-                    <br>
-                    <input type="textfield" id="services-offered">
-                </div>
 
 
-                <div class="update name">
-                    <button>Update</button>
-                </div>
-
-                <div class="update location">
-                    <button>Delete Account</button>
-                </div>
-            </div>
-
-
-            
-        </form>
+                
+            </form>
+        {% endfor %}
     </main>
 </body>
 </html>

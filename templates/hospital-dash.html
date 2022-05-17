@@ -16,86 +16,160 @@
 <body>
     <header>{% include 'header.html'%}</header>
     <main style="margin-top: 10em;">
-        <form action="">
-            <input type="number" name="ratings" value="3" id="ratings-number" style="display: none"> e
-            <div class="grid-dashboard">
-                <div class="stars flex">
-                    <h4>Your ratings: </h4>
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                    <img src="../static/assets/icons/star.png" class="star" alt="">
-                </div>
-                <div class="flex profile-pic">
-                    <img src="" id="blah" alt="profile-picture">
+        {% for row in rows%}
+        <form action="/dashboard-update" method="POST" enctype="multipart/form-data">
+                <div class="grid-dashboard">
+                    <div class="stars flex">
+                        <h4>Your ratings: </h4>
+                        {% if row[9] == 0 %}
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor"> ratings: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                    </div>
+                            </div>
+                        {% elif row[9] == 1 %}    
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor">: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                    </div>
+                            </div>
+
+                        {% elif row[9] == 2 %}    
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor">: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                    </div>
+                            </div>
+
+                        {% elif row[9] == 3 %}    
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor">: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                    </div>
+                            </div>
+                            
+                        {% elif row[9] == 4 %}    
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor">: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star.png" class="star" alt="">
+                                    </div>
+                            </div>
+                        
+                        {% elif row[9] == 4 %}    
+                            <div class="flex" style="gap: 0.5em">
+                                <p class="card-infor">: </b>
+                                <div class="stars flex">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                        <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                    </div>
+                            </div> 
+
+
+                        {% endif %}
+                    </div>
+                    <div class="flex profile-pic">
+                        <img src="data:;base64,{{row[7].decode('utf-8')}}" id="blah" alt="profile-picture">
                     <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
-                    <label for="profile-change">Change your profile picture</label>
+                        <label for="profile-change">Change your profile picture</label>
+                    </div>
+
+                    <div class="name">
+                        <label for="name">Name: </label>
+                        <br>
+                        <input type="text" name="name" value="{{row[0]}}" id="name">
+                    </div>
+
+                    <div class="location">
+                        <label for="location">Location: </label>
+                        <br>
+                        <input type="text" name="location" value="{{row[1]}}" id="location">
+                    </div>
+
+                    <div class="name">
+                        <label for="phoneno">Phonenumber: </label>
+                        <br>
+                        <input type="text" name="phoneno" value="{{row[2]}}" id="phoneno">
+                    </div>
+
+                    <div class="location">
+                        <label for="email">Email: </label>
+                        <br>
+                        <input type="email" name="email" value="{{row[3]}}" id="email">
+                    </div>
+
+                    <div class="name">
+                        <label for="passw">Password: </label>
+                        <br>
+                        <input type="text" name="password" value="{{row[4]}}" id="passw">
+                    </div>
+
+                    <div class="location">
+                        <label for="services-offered">Services Offered:</label>
+                        <br>
+                        <textarea name="services" id="services-offered"  cols="30" rows="4">{{row[5]}}</textarea>
+                    </div>
+
+                    <div class="name">
+                        <label for="ambulance">Ambulance available: </label>
+                        <select name="ambulance" id="ambulance">
+                            <option value="{{row[6]}}">{{row[6]}}</option>
+                            <option value="no">No</option>
+                            <option value="yes">Yes</option>
+                        </select>
+                    </div>
+
+                    <div class="name ambulance-pic">
+                        <h5>Your ambulance photo: </h5>
+                        <img src="data:;base64,{{row[8].decode('utf-8')}}" id="blah2" value="data:;base64,{{row[8].decode('utf-8')}}" id="profile-change" alt="profile-picture">
+                        <input type="file" name="ambulancePhoto" id="ambulance-change" onchange="readURL2(this);">
+                        <label for="ambulance-change">Click here to change your ambulance picture</label>
+                    </div>
+
+                    <div class="update name">
+                        <button>Update</button>
+                    </div>
+
+                    <form action="/dashboard-delete" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="name" value="{{row[0]}}" id="name" class="sr-only">
+
+                        <div class="update location">
+                            <button>Delete Account</button>
+                        </div>
+                    </form>
                 </div>
 
-                <div class="name">
-                    <label for="name">Name: </label>
-                    <br>
-                    <input type="text" id="name">
-                </div>
 
-                <div class="location">
-                    <label for="location">Location: </label>
-                    <br>
-                    <input type="text" id="location">
-                </div>
-
-                <div class="name">
-                    <label for="phoneno">Phonenumber: </label>
-                    <br>
-                    <input type="text" id="phoneno">
-                </div>
-
-                <div class="location">
-                    <label for="email">Email: </label>
-                    <br>
-                    <input type="email" id="email">
-                </div>
-
-                <div class="name">
-                    <label for="passw">Password: </label>
-                    <br>
-                    <input type="password" id="passw">
-                </div>
-
-                <div class="location">
-                    <label for="services-offered">Services Offered:</label>
-                    <br>
-                    <input type="textfield" id="services-offered">
-                </div>
-
-                <div class="name">
-                    <label for="ambulance">Ambulance available: </label>
-                    <select name="" id="ambulance">
-                        <option value="no">No</option>
-                        <option value="yes">Yes</option>
-                    </select>
-                </div>
-
-                <div class="name ambulance-pic">
-                    <h5>Your ambulance photo: </h5>
-                    <img src="" id="blah2" alt="profile-picture">
-                    <input type="file" name="ambulance" id="ambulance-change" onchange="readURL2(this);">
-                    <label for="ambulance-change">Click here to change your ambulance picture</label>
-                </div>
-
-                <div class="update name">
-                    <button>Update</button>
-                </div>
-
-                <div class="update location">
-                    <button>Delete Account</button>
-                </div>
-            </div>
-
-
-            
-        </form>
+                
+            </form>
+        {% endfor %}
     </main>
 </body>
 </html>

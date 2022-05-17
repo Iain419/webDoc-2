@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All available hospitals</title>
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <script src="../static/js/rate.js"></script>
+</head>
+<body>
+    <header>{% include 'header.html'%}</header>
+    <main>
+        <div class="container">
+            {% if session['username'] %}
+            <p class="results">Rate the hospitals for others</p>
+            {% else %}
+            <p class="results">Login to rate the hospitals</p>
+            {% endif %}
+            <p class="results">{{msg}}</p>
+            <div class="row">
+                {% for row in rows %}
+                <div class="col-4">
+                        <div class="card">
+                            <img src="data:;base64,{{row[7].decode('utf-8')}}" class="card-image"/> <!-- Fetching the image -->
+                            <div class="card-body">
+                                <form action="/rate", method="POST" enctype="multipart/form-data">
+                                    <p class="card-infor"><b>Name: </b>{{row[0]}}</p> <!--fetching the names-->
+                                    <input type="text" name="name" value="{{row[0]}}" style="display: none">
+                                    <div class="row" style="display: none">
+                                        <input type="text" name="name"  value="{{row[0]}}">
+                                    </div>
+                                    <p class="card-infor"><b>Phone number: </b>{{row[2]}}</p> <!--fetching the phonenumber-->
+                                    <p class="card-infor"><b>Location: </b> {{row[1]}}</p> <!--fetching the location-->
+                                    <input type="text" name="location"  value="{{row[1]}}" style="display: none;">
+                                    <p class="card-infor"><b>Services: </b> {{row[5]}}</p> 
+                                    {% if session.username %}
+                                        {% if row[10] == None %}
+                                            <p class="card-infor"><b>Your ratings: </b><input type="number" name="rate" value=0 style="width: 2em; aspect-ratio: 1; text-align: center" min="0" max="5"> out of 5</p>
+                                        {% else %}
+                                            <p class="card-infor"><b>Your ratings: </b><input type="number" name="rate" value={{row[10]}} style="width: 2em; aspect-ratio: 1; text-align: center" min="0" max="5"> out of 5</p>
+                                        {% endif %}
+
+                                    {% endif %}
+                                    <input type="text" name="currentRatings" value="{{row[9]}}" style="display: none">
+                                    {% if row[9] == 0 %}
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Current ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                </div>
+                                        </div>
+                                    {% elif row[9] == 1 %}    
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                </div>
+                                        </div>
+
+                                    {% elif row[9] == 2 %}    
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                </div>
+                                        </div>
+
+                                    {% elif row[9] == 3 %}    
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                </div>
+                                        </div>
+                                        
+                                    {% elif row[9] == 4 %}    
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star.png" class="star" alt="">
+                                                </div>
+                                        </div>
+                                    
+                                    {% elif row[9] == 4 %}    
+                                        <div class="flex" style="gap: 0.5em">
+                                            <p class="card-infor"><b>Ratings: </b>
+                                            <div class="stars flex">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                    <img src="../static/assets/icons/star2.png" class="star" alt="">
+                                                </div>
+                                        </div> 
+
+
+                                    {% endif %}
+
+                                    </p> <!--fetching the services--><!--fetching the ratings-->
+                                    {% if session.username %}
+                                        <button class="card-btn" type="submit">Rate</button>
+                                    {% endif %}
+                                    
+                                </form>
+                                
+                            </div>
+                        </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>

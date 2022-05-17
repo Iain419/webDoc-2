@@ -16,56 +16,55 @@
 <body>
     <header>{% include 'header.html'%}</header>
     <main style="margin-top: 10em;">
-        <form action="">
-            <input type="number" name="ratings" value="3" id="ratings-number" style="display: none"> 
+        <form action="/update-doctor", method="POST" enctype="multipart/form-data">
             <div class="grid-dashboard2">
                 <div class="name">
                     <label for="username">Username: </label>
                     <br>
-                    <input type="text" id="username">
+                    <input type="text" name="username" id="username">
                 </div>
 
                 <div class="location">
                     <label for="name">Name: </label>
                     <br>
-                    <input type="text" id="name">
+                    <input type="text" name="name" id="name">
                 </div>
 
                 <div class="name">
                     <label for="location">Location: </label>
                     <br>
-                    <input type="text" id="location">
+                    <input type="text" name="location" id="location">
                 </div>
 
                 <div class="location">
                     <label for="phoneno">Phonenumber: </label>
                     <br>
-                    <input type="text" id="phoneno">
+                    <input type="text" name="phoneno" id="phoneno">
                 </div>
 
                 <div class="name">
                     <label for="email">Email: </label>
                     <br>
-                    <input type="email" id="email">
+                    <input type="email" name="email" id="email">
                 </div>
 
                 <div class="location">
                     <label for="passw">Password: </label>
                     <br>
-                    <input type="password" id="passw">
+                    <input type="password" name="password" id="passw">
                 </div>
 
 
                 
                 <div class="name ambulance-pic">
                     <h5>Profile photo: </h5>
-                    <img src="" id="blah2" alt="profile-picture">
-                    <input type="file" name="profile" id="profile-pic" onchange="readURL2(this);">
-                    <label for="profile-pic">Click here to upload the profile picture</label>
+                    <img src="" id="blah" alt="profile-picture">
+                    <input type="file" name="photo" id="profile-change" onchange="readURL(this);">
+                    <label for="profile-change">Add profile picture</label>
                 </div>
 
                 <div class="update name">
-                    <button>Update</button>
+                    <button type="submit">Update</button>
                 </div>
 
             </div>

@@ -7,16 +7,23 @@
     <title>Welcome to WebDoc</title>
     <link rel="stylesheet" href="../static/css/style.css">
     <script src="../static/js/app.js" defer></script>
-    <script src="../static/js/loc-selec.js" defer></script>
 </head>
 <body class="ff-open-sans">
+    <script src="../static/js/localstorage.js" defer></script>
     <header>{% include 'header.html' %}</header>
+
     <main class="ff-open-sans">
+        {% if session.role == "doctor" %}
+            <div class="flex scheduled" style="margin-top: 5rem;
+            margin-bottom: 0">
+                <a href="/scheduled-appoinments">Your appointments</a>
+            </div>
+        {% endif %}
         <div class="grid-container">
             <img src="../static/assets/vertical-man-doc.jpg" alt="">
             <div>
                 <div class="intro">
-                    <p class="invalid-msg">{{msg}}</p>
+                    <p class="invalid-msg" id="invalid-msg">{{msg}}</p>
                     <h1>Connecting you to the nearest hosiptal, ambulance or private doctor services near you!!</h1>
                 </div>
     
@@ -35,9 +42,9 @@
                 <div class="services-offered flex" id="services-offered">
 
                     <div class="service-card service-card-inactive">
-                        <form action="">
+                        <form action="/all-hospitals-available", method="POST" enctype="multipart/form-data">
                             <input type="text" name="location" value="" style="display: none" class="location-values">
-                            <button>
+                            <button type="submit">
                                 <img src="../static/assets/hospital-dark.png" alt="">
                                 <div class="heading">
                                     <h2>Hospital</h2>

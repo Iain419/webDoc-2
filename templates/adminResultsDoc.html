@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All available hospitals</title>
+    <link rel="stylesheet" href="../static/css/bootstrap-grid.css">
+    <script src="../static/js/rate.js"></script>
+</head>
+<body>
+    <header>{% include 'header.html'%}</header>
+    <main>
+        <div class="container">
+            <p class="results">{{msg}}</p>
+            <div class="row">
+                {% for row in rows %}
+                <div class="col-4">
+                        <div class="card">
+                            <img src="data:;base64,{{row[4].decode('utf-8')}}" class="card-image"/> <!-- Fetching the image -->
+                            <div class="card-body">
+                                <form action="/remove-doctor", method="POST" enctype="multipart/form-data">
+                                    <p class="card-infor"><b>Name: </b>{{row[0]}}</p> <!--fetching the names-->
+                                    <input type="text" name="name" value="{{row[0]}}" style="display: none">
+                                    <p class="card-infor"><b>Phone number: </b>{{row[2]}}</p> <!--fetching the phonenumber-->
+                                    <p class="card-infor"><b>Location: </b> {{row[1]}}</p> <!--fetching the location-->
+                                    <p class="card-infor"><b>Specialist in: </b> {{row[5]}}</p> 
+                                    <button class="card-btn" type="submit">Remove</button>                                   
+                                </form>
+                                
+                            </div>
+                        </div>
+                </div>
+                {% endfor %}
+                
+            </div>
+        </div>
+    </main>
+
+</body>
+</html>
