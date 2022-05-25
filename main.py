@@ -90,7 +90,7 @@ def login():
             session['username'] = username
             session['role'] = "user"
             session.permanent = True
-            return redirect(request.referrer)
+            return redirect('/')
         
         elif pass_cursor.rowcount == 0:
             sql = "SELECT * FROM hospital WHERE name = %s and password = %s"
@@ -347,6 +347,7 @@ def update_doctor():
         phoneno = str(request.form['phoneno'])
         email = str(request.form['email'])
         password = str(request.form['password'])
+        specialist = str(request.form['specialist'])
         photo = request.files['photo']
         
 
@@ -363,9 +364,9 @@ def update_doctor():
                 db='webDoc',
             )
 
-        sql = "INSERT INTO `privateDoctors`(`username`, `name`, `location`, `phoneno`, `email`, `password`, `photo`) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        sql = "INSERT INTO `privateDoctors`(`username`, `name`, `location`, `phoneno`, `email`, `password`, `photo`, `specialist`) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
         update_cursor =  update_conn.cursor()
-        update_cursor.execute(sql, (username, name, location, phoneno, email, password, encodedimage,))
+        update_cursor.execute(sql, (username, name, location, phoneno, email, password, encodedimage, specialist))
         update_conn.commit()
 
         msg = "Successfully added " + name + " to the database."
@@ -386,7 +387,7 @@ def all_hosp_available(location = 'none'):
 
     if 'username' in session:
         username = session.get('username')
-        sql = "SELECT `name`, `location`, `phoneno`, `email`, `password`, `services`, `ambulance`, `photo`, `ambulancePhoto`, hospital.ratings ,userratings.ratings FROM `hospital` LEFT JOIN userratings ON hospital.name = userratings.hospitalName WHERE `location` = %s OR userratings.username = %s"
+        sql = "SELECT `name`, `location`, `phoneno`, `email`, `password`, `services`, `ambulance`, `photo`, `ambulancePhoto`, hospital.ratings ,userratings.ratings FROM `hospital` LEFT JOIN userratings ON hospital.name = userratings.hospitalName WHERE `location` = %s AND userratings.username = %s"
     else:
         sql = "SELECT `name`, `location`, `phoneno`, `email`, `password`, `services`, `ambulance`, `photo`, `ambulancePhoto`, `ratings` FROM `hospital` WHERE `location` = %s"
 
@@ -471,7 +472,7 @@ def rate():
             conn3.commit()
             return all_hosp_available(location)
     else:
-        return redirect(request.referrer)
+        return redirect('/')
 
 @app.route('/all-ambulance', methods=['POST', 'GET'])
 def all_ambulance():
@@ -642,7 +643,7 @@ def scheduled_appoinments():
         cursor.execute(sql, username)
 
         if cursor.rowcount == 0:
-            return render_template('scheduledResults.html', msg="No appoinments booked yet")
+            return render_template('scheduledResultsDoc.html', msg="No appoinments booked yet")
         else:
             rows = cursor.fetchall()
             return render_template('scheduledResultsDoc.html', rows=rows)
@@ -696,6 +697,11 @@ def remove():
     if session.get("role") == "user" and request.method == "POST":
         sql = "DELETE FROM `schedules` WHERE patientName = %s AND doctorName = %s"
         cursor.execute(sql, (username, doctorName))
+        conn.commit()
+        return redirect('/scheduled-appoinments')
+    elif(session.get("role") == "doctor" and request.method == "POST"):
+        sql = "DELETE FROM schedules LEFT JOIN privateDoctors on schedules.doctorName = privateDoctors.name WHERE schedules.patientName = %s AND privateDoctors.username = %s"
+        cursor.execute(sql, (doctorName, username))
         conn.commit()
         return redirect('/scheduled-appoinments')
     
